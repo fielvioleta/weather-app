@@ -1,0 +1,189 @@
+@import 'variables';
+
+html, body, #root {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+}
+
+body {
+    background-color: $bg-color;
+    font-family: 'Work Sans', sans-serif;
+    color: $white;
+}
+
+
+// commons
+.flex {
+    display: flex;
+}
+
+.flex-row {
+    flex-direction: row;
+}
+
+.flex-col {
+    flex-direction: column;
+}
+
+.flex-1 {
+    flex: 1;
+}
+
+.font-medium {
+    font-weight: 500;
+}
+
+.font-semibold	{
+    font-weight: 600;
+}
+
+.font-bold	{
+    font-weight: 700;
+}
+	
+.items-end {
+    align-items: flex-end;
+}
+	
+.items-center {
+    align-items: center;
+}
+
+.justify-end {
+    justify-content: flex-end;
+}
+
+.justify-around {
+    justify-content: space-around;
+}
+
+.justify-evenly	{
+    justify-content: space-evenly
+}
+
+
+.searchContainer {
+    margin: 30px 5%;
+
+    .search-box {
+        border-radius: 4px;
+        overflow: hidden;
+        background-color: $details-color;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+
+        input[type="text"] {
+            padding: 10px 15px;
+            border: none;
+            outline: none;
+            background-color: $details-color; 
+            color: $input-color; 
+            font-size: 16px;
+        }
+        
+        input[type="text"]::placeholder {
+            color: $placeholder-color;
+        }
+        
+        button {
+            background-color: $button-color; 
+            color: $white;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+        
+        button:hover {
+            background-color: $button-hover;
+        }
+    }
+    
+}
+
+.box {
+    border-radius: 10px;
+    background-color: rgba(0, 0, 0, 0.4);
+    border: 1px solid $box-color;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    margin: 0 5%;
+    padding: 20px;
+    box-shadow: 0px 0px 10px rgba(125, 135, 136, 0.5);
+}
+
+.cityName {
+    font-size: 35px;
+    color: $city-color;
+}
+
+.temp {
+    font-size: 80px;
+    color: $temp-color;
+}
+
+.qualityDetails {
+    color: $label-color;
+    font-size: 25px;
+    margin-bottom: 15px;
+}
+
+.labelDetails {
+    color: $details-color;
+    font-size: 25px;
+    margin: 30px 5% 20px 5%;
+}
+
+.labelDetailsContainer {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(2, auto);
+    gap: 40px;
+    padding: 20px;
+
+    .labelDetailsContainerItem {
+        height: 130px;
+        border-radius: 10px;
+        background-color: rgba(0, 0, 0, 0.4);
+        transform: rotate(0deg);
+        padding: 20px;
+        font-size: 18px;
+
+        .containerItemLabel {
+            color: $city-color;
+        }
+
+        .containerItemValue {
+            color: $label-color;
+        }
+    }
+}
+
+@media (max-width: 724px) {
+    .box {
+        .cityName {
+            align-self: center;
+            font-size: 25px;
+        }
+
+        .citySubDetails {
+            flex-direction: column;
+            align-items: center;
+
+            .qualityDetails {
+                align-items: center;
+                font-size: 15px;
+            }
+        
+            .temp {
+                font-size: 60px;
+            }
+        }
+
+        &.labelDetailsContainer {
+            display: flex;
+            gap: 20px;
+        }
+    }
+}
