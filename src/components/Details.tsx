@@ -17,6 +17,13 @@ const Details: React.FC = () => {
     dispatch(setUnits(units === 'metric' ? 'imperial' : 'metric'));
   };
 
+  const formatKey = (key: string) => {
+    return key.replace(/_/g, ' ')
+      .split(' ')
+      .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+      .join(' ');
+  };
+
   if (loading) return <div className="loading">Loading...</div>;
   if (error) return <div className="error">{error}</div>;
 
@@ -45,38 +52,14 @@ const Details: React.FC = () => {
 
       <div className='labelDetails font-semibold'>Weather details</div>
       <div className='flex box flex-col labelDetailsContainer'>
-        <div className='labelDetailsContainerItem flex flex-col items-center justify-evenly'>
-          <div className='containerItemLabel font-medium'>Feels like</div>
-          <div className='containerItemValue'>{main.feels_like}</div>
-        </div>
-        <div className='labelDetailsContainerItem flex flex-col items-center justify-evenly'>
-          <div className='containerItemLabel font-medium'>Ground Level</div>
-          <div className='containerItemValue'>{main.grnd_level}</div>
-        </div>
-        <div className='labelDetailsContainerItem flex flex-col items-center justify-evenly'>
-          <div className='containerItemLabel font-medium'>Humidity</div>
-          <div className='containerItemValue'>{main.humidity}%</div>
-        </div>
-        <div className='labelDetailsContainerItem flex flex-col items-center justify-evenly'>
-          <div className='containerItemLabel font-medium'>pressure</div>
-          <div className='containerItemValue'>{main.pressure}</div>
-        </div>
-        <div className='labelDetailsContainerItem flex flex-col items-center justify-evenly'>
-          <div className='containerItemLabel font-medium'>Sea Level</div>
-          <div className='containerItemValue'>{main.sea_level}</div>
-        </div>
-        <div className='labelDetailsContainerItem flex flex-col items-center justify-evenly'>
-          <div className='containerItemLabel font-medium'>Temp</div>
-          <div className='containerItemValue'>{main.temp}</div>
-        </div>
-        <div className='labelDetailsContainerItem flex flex-col items-center justify-evenly'>
-          <div className='containerItemLabel font-medium'>Temp Min</div>
-          <div className='containerItemValue'>{main.temp_min}</div>
-        </div>
-        <div className='labelDetailsContainerItem flex flex-col items-center justify-evenly'>
-          <div className='containerItemLabel font-medium'>Temp Max</div>
-          <div className='containerItemValue'>{main.temp_max}</div>
-        </div>
+        {
+          Object.entries(main).map(([key, value]: any) => (
+            <div key={key} className='labelDetailsContainerItem flex flex-col items-center justify-evenly'>
+              <div className='containerItemLabel font-medium'>{formatKey(key)}</div>
+              <div className='containerItemValue'>{value}</div>
+            </div>
+          ))
+        }
       </div> 
     </>
     
