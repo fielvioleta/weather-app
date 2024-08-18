@@ -17,8 +17,8 @@ const Details: React.FC = () => {
     dispatch(setUnits(units === 'metric' ? 'imperial' : 'metric'));
   };
 
-  if (loading) return <div>Loading...</div>;
-  if (error) return <div>{error}</div>;
+  if (loading) return <div className="loading">Loading...</div>;
+  if (error) return <div className="error">{error}</div>;
 
   return (
     (city && main) && 
@@ -26,7 +26,7 @@ const Details: React.FC = () => {
       <div className='flex box flex-col'>
         <div className='font-semibold cityName'>
           {city}
-          <button onClick={toggleUnits}>
+          <button className="switch" onClick={toggleUnits}>
             Switch to {units === 'metric' ? 'Fahrenheit' : 'Celsius'}
           </button>
         </div>

@@ -64,6 +64,10 @@ body {
 }
 
 
+.loading, .error {
+    margin: 0 5%;
+}
+
 .searchContainer {
     margin: 30px 5%;
 
@@ -186,4 +190,16 @@ body {
             gap: 20px;
         }
     }
+}
+
+button.switch {
+    padding: 12px 24px;
+    color: $white;
+    background-color: $button-color;
+    border: none;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s;
+    cursor: pointer;
+    margin-left: 20px;
 }
