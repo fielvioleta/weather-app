@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { RootState } from '../redux/store';
-import { setUnits } from '../redux/weatherSlice';
+import { AppDispatch, RootState } from '../redux/store';
+import { getWeather, setUnits } from '../redux/weatherSlice';
 
 const Details: React.FC = () => {
   const { 
@@ -11,7 +11,7 @@ const Details: React.FC = () => {
     city,
     main
   } = useSelector((state: RootState) => state.weather);
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
 
   const toggleUnits = () => {
     dispatch(setUnits(units === 'metric' ? 'imperial' : 'metric'));
@@ -23,6 +23,10 @@ const Details: React.FC = () => {
       .map(word => word.charAt(0).toUpperCase() + word.slice(1))
       .join(' ');
   };
+
+  useEffect(() => {
+    city && dispatch(getWeather({ city, units }));
+  }, [units]);
 
   if (loading) return <div className="loading">Loading...</div>;
   if (error) return <div className="error">{error}</div>;
