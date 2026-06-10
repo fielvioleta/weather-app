@@ -4,7 +4,7 @@ import { AppDispatch, RootState } from '../redux/store';
 import { getWeather, setUnits } from '../redux/weatherSlice';
 
 const Details: React.FC = () => {
-  const { 
+  const {
     units,
     loading,
     error,
@@ -32,42 +32,56 @@ const Details: React.FC = () => {
   if (error) return <div className="error">{error}</div>;
 
   return (
-    (city && main) && 
-    <>
-      <div className='flex box flex-col'>
-        <div className='font-semibold cityName'>
-          {city}
-          <button className="switch" onClick={toggleUnits}>
-            Switch to {units === 'metric' ? 'Fahrenheit' : 'Celsius'}
-          </button>
-        </div>
-        <div className='flex citySubDetails'>
-          
-          <div className='flex flex-1 items-end'>
-            <div className='temp font-bold'>{main.temp} °{units === 'metric' ? 'C' : 'F'}</div>
+    (city && main) && (
+      <div className="weather-container">
+
+        {/* Top Card */}
+        <div className="weather-card">
+
+          <div className="weather-header">
+            <h1 className="city-name">{city}</h1>
+
+            <button className="unit-btn" onClick={toggleUnits}>
+              °{units === 'metric' ? 'F' : 'C'}
+            </button>
           </div>
 
-          <div className='flex flex-1 flex-col items-end qualityDetails font-medium justify-around'>
-            <div>Sun 63°C 57°C</div>
-            <div>Air quality : 20 - Good</div>
-          </div>
-        </div>
-      </div>
-
-      <div className='labelDetails font-semibold'>Weather details</div>
-      <div className='flex box flex-col labelDetailsContainer'>
-        {
-          Object.entries(main).map(([key, value]: any) => (
-            <div key={key} className='labelDetailsContainerItem flex flex-col items-center justify-evenly'>
-              <div className='containerItemLabel font-medium'>{formatKey(key)}</div>
-              <div className='containerItemValue'>{value}</div>
+          <div className="weather-main">
+            <div className="temperature">
+              {Math.round(main.temp)}°
             </div>
-          ))
-        }
-      </div> 
-    </>
-    
-  );
+
+            <div className="weather-meta">
+              <p className="feels-like">
+                Feels like {Math.round(main.feels_like)}°
+              </p>
+              <p className="air-quality">
+                Air Quality: 20 • Good
+              </p>
+            </div>
+          </div>
+        </div>
+
+        {/* Details Section */}
+        <h2 className="section-title">Weather Details</h2>
+
+        <div className="details-grid">
+          {[
+            { label: "Humidity", value: main.humidity + "%" },
+            { label: "Pressure", value: main.pressure + " hPa" },
+            { label: "Temp Min", value: Math.round(main.temp_min) + "°" },
+            { label: "Temp Max", value: Math.round(main.temp_max) + "°" },
+          ].map((item) => (
+            <div key={item.label} className="detail-card">
+              <span className="detail-label">{item.label}</span>
+              <span className="detail-value">{item.value}</span>
+            </div>
+          ))}
+        </div>
+
+      </div>
+    )
+  )
 };
 
 export default Details;

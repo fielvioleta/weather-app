@@ -16,15 +16,21 @@ const Search: React.FC = () => {
   };
 
   return (
-    <div className='search-box flex items-center'>
-      <input 
-        type="text" 
-        value={city} 
-        onChange={(e) => setCity(e.target.value)} 
-        placeholder="Enter city name"
-        className='flex-1'
-      />
-      <button onClick={handleSearch}>Search</button>
+    <div className="search-container">
+      <div className="search-box">
+        <input
+          type="text"
+          value={city}
+          onChange={(e) => setCity(e.target.value)}
+          placeholder="Search city..."
+          onKeyDown={(e) => e.key === "Enter" && handleSearch()}
+          className="search-input"
+        />
+
+        <button onClick={handleSearch} className="search-btn">
+          Search
+        </button>
+      </div>
     </div>
   );
 };
